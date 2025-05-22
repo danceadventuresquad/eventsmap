@@ -9,6 +9,9 @@ function initMap() {
     center: { lat: -33.8688, lng: 151.2093 }, // Center on Sydney
     zoom: 10,
   });
+
+  document.getElementById('weekdayFilter').addEventListener('change', applyAndDisplayFilters);
+  
   fetchEvents(); // Initial fetch
   setInterval(fetchEvents, REFRESH_INTERVAL); // Periodic refresh
 }
@@ -36,17 +39,42 @@ async function fetchEvents() {
   }
 }
 
-function updateMapMarkers(events) {
-  // Clear existing markers
+function applyAndDisplayFilters() {
+  if (!allEvents || allEvents.length === 0) {
+    updateMapMarkers([]); // Clear map if no events
+    return;
+  }
+
+  let filteredEvents = [...allEvents]; // Start with a copy of all events
+
+  // Apply Weekday Filter
+  const selectedWeekday = document.getElementById('weekdayFilter').value;
+  if (selectedWeekday !== "all") {
+    filteredEvents = filteredEvents.filter(event => event.weekday === selectedWeekday);
+  }
+
+  // TODO: Implement other filters (date range, category) here
+  // Example for a hypothetical category filter:
+  // const selectedCategory = document.getElementById('categoryFilter').value;
+  // if (selectedCategory !== "all") {
+  //   filteredEvents = filteredEvents.filter(event => event.category === selectedCategory);
+  // }
+
+  console.log("Applying filters. Displaying events:", filteredEvents.length);
+  updateMapMarkers(filteredEvents); // Update map with filtered events
+}
+
+function updateMapMarkers(eventsToDisplay) { 
+  console.log("Inside updateMapMarkers. Number of events to display:", eventsToDisplay.length);
+
   currentMarkers.forEach(marker => marker.setMap(null));
   currentMarkers = [];
-
   const infowindow = new google.maps.InfoWindow();
 
-  events.forEach(event => {
-    if (event.lat == null || event.lng == null) {
-        console.warn("Skipping event with missing coordinates:", event.name);
-        return; // Skip if no lat/lng
+  eventsToDisplay.forEach(event => {
+    if (event.lat == null || event.lng == null || isNaN(parseFloat(event.lat)) || isNaN(parseFloat(event.lng))) {
+        console.warn("Skipping event with missing or invalid coordinates:", event.name, event.lat, event.lng);
+        return; 
     }
 
     const marker = new google.maps.Marker({
@@ -70,4 +98,5 @@ function updateMapMarkers(events) {
     });
     currentMarkers.push(marker);
   });
+  console.log("Total markers on map:", currentMarkers.length);  
 }
