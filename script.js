@@ -18,7 +18,7 @@ async function initMap() {
     map = new Map(document.getElementById("map"), {
       center: { lat: -33.8688, lng: 151.2093 }, // Center on Sydney
       zoom: 10,
-      // mapId: "YOUR_MAP_ID" // Optional: Recommended for advanced markers & cloud styling. Create in Cloud Console.
+      mapId: "d9bb12f1843d325493da7801" // Optional: Recommended for advanced markers & cloud styling. Create in Cloud Console.
     });
 
     // Setup filter listeners
