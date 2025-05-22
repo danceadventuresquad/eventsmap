@@ -15,6 +15,24 @@
   </style>
 </head>
 <body>
+  <div id="filter-controls" style="background: #fff; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; position: absolute; top: 10px; left: 10px; z-index: 10;">
+  <h4>Filter Events</h4>
+  
+  <label for="weekdayFilter">Weekday:</label>
+  <select id="weekdayFilter">
+    <option value="all">All Weekdays</option>
+    <option value="Monday">Monday</option>
+    <option value="Tuesday">Tuesday</option>
+    <option value="Wednesday">Wednesday</option>
+    <option value="Thursday">Thursday</option>
+    <option value="Friday">Friday</option>
+    <option value="Saturday">Saturday</option>
+    <option value="Sunday">Sunday</option>
+  </select>
+  
+  </div>
+
+  
   <div id="map"></div>
   <script src="script.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDFDZPKR8uQkYC48fwtIEXbervILjPuXk&callback=initMap">
