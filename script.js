@@ -60,6 +60,8 @@ function updateMapMarkers(events) {
       content += `<p><strong>Date:</strong> <span class="math-inline">\{event\.date\} \(</span>{event.weekday})</p>`;
       content += `<p><strong>Time:</strong> ${event.time}</p>`;
       content += `<p><strong>Location:</strong> ${event.location}</p>`;
+      content += `<p><a href="${directionsUrl}" target="_blank" title="Open directions in Google Maps">Get Directions</a></p>`; 
+      
       if (event.description) {
         content += `<hr><p>${event.description.replace(/\n/g, "<br>")}</p>`;
       }
