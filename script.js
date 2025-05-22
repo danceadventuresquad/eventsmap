@@ -2,7 +2,7 @@ let map;
 let currentMarkers = [];
 // URL of your Apps Script web app that serves JSON
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyEPikMZ0IYuMbhMG2SX7vPJSUtCKHQ2URTE3fK_TnTpHc6Qo4CcdqZW_1PriKlk8U3/exec"; 
-const REFRESH_INTERVAL = 15 * 60 * 1000; // 15 minutes in milliseconds
+const REFRESH_INTERVAL = 60 * 60 * 1000; // 60 minutes in milliseconds
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
